@@ -4,12 +4,13 @@ from pathlib import Path
 
 
 LATITUDE = -9.1269   #Coordinates for
-LONGITUDE = -36.4589 #Lagoa do Ouro-PE-BR
+LONGITUDE = -36.4589 #Lagoa do Ouro - PE - BR
 START_DATE = "2024-01-01"
 END_DATE = "2025-12-01"
 ARCH_URL = "https://archive-api.open-meteo.com/v1/archive" 
 
 def extract_weather_data(lat, lon, st_dt, end_dt, url):
+
     params = {
         "latitude": lat,
         "longitude": lon,
@@ -27,6 +28,7 @@ def extract_weather_data(lat, lon, st_dt, end_dt, url):
     return response.json()
 
 def transform_data(json_data):
+
     hourly_data = json_data["hourly"]
 
     df = pd.DataFrame(hourly_data)
@@ -47,6 +49,7 @@ def transform_data(json_data):
     return df
 
 def load_data(df, path_str):
+
     path = Path(path_str)
 
     path.parent.mkdir(parents=True, exist_ok=True)
